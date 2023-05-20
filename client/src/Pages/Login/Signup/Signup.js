@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   const [name,setName] = useState('');
@@ -18,10 +20,23 @@ const Signup = () => {
     .then(result =>{
       const user = result.user;
       console.log(user);
+      toast.success('You are successfully created an id..', {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       const userInfo = {
         displayName: name
       }
       updateUser(userInfo);
+      setEmail("");
+      setPassword('');
+      setName('');
     })
     .then({})
     .catch(error => {
@@ -30,6 +45,18 @@ const Signup = () => {
   }
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
