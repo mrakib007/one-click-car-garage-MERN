@@ -10,6 +10,7 @@ const Signup = () => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [signupError,setSignupError] = useState('');
+  const [createUserEmail,setCreatedUserEmail] = useState('');
   const googleProvider = new GoogleAuthProvider();
   const {createUser,updateUser} = useContext(AuthContext);
 
@@ -33,14 +34,30 @@ const Signup = () => {
       const userInfo = {
         displayName: name
       }
-      updateUser(userInfo);
+      updateUser(userInfo).then(()=>{
+        saveUser(name,email);
+      }).catch(error => console.log(error));
       setEmail("");
       setPassword('');
       setName('');
     })
-    .then({})
     .catch(error => {
       setSignupError(error.message);
+    })
+  }
+
+  const saveUser = (name,email) =>{
+    const user = {name,email};
+    fetch('http://localhost:5000/users',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data =>{
+      setCreatedUserEmail(email);
     })
   }
     return (
@@ -136,7 +153,14 @@ const Signup = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                Sign up
+              </button>
+              <div className="divider">OR</div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-orange-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Continue With Google
               </button>
             </div>
             {signupError && <p className='text-red-500'>{signupError}</p>}
