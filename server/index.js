@@ -11,13 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.3zndhpn.mongodb.net/?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run(){
     try{
@@ -29,14 +23,17 @@ async function run(){
         const oldUser = await usersCollection.findOne(filter);
         if(!oldUser){
             const result = await usersCollection.insertOne(user);
+            res.send(result);
         }else{
             res.status(400).json({message: 'User already exists'});
         }
-    })}
+    });
+
+}
     finally{
     }
 }
-run().catch(console.log())
+run().catch(console.log)
 app.get('/',async(req,res)=>{
     res.send('One Click Car Solution Server Running');
 })
