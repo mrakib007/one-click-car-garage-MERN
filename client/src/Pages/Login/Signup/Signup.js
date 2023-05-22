@@ -5,15 +5,18 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import {ToastContainer, toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineGoogle } from "react-icons/ai";
+import useToken from '../../../hooks/useToken';
 
 const Signup = () => {
   const [name,setName] = useState('');
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [signupError,setSignupError] = useState('');
-  const [createUserEmail,setCreatedUserEmail] = useState('');
+  const [createdUserEmail,setCreatedUserEmail] = useState('');
   const googleProvider = new GoogleAuthProvider();
   const {createUser,updateUser,providerLogin} = useContext(AuthContext);
+
+  // const [token] = useToken(createdUserEmail);
 
   const handleSignUp = (event) =>{
     event.preventDefault();
