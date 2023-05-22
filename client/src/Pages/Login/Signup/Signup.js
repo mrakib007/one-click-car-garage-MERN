@@ -13,7 +13,7 @@ const Signup = () => {
   const [signupError,setSignupError] = useState('');
   const [createUserEmail,setCreatedUserEmail] = useState('');
   const googleProvider = new GoogleAuthProvider();
-  const {createUser,updateUser} = useContext(AuthContext);
+  const {createUser,updateUser,providerLogin} = useContext(AuthContext);
 
   const handleSignUp = (event) =>{
     event.preventDefault();
@@ -47,6 +47,29 @@ const Signup = () => {
     })
   }
 
+  const handleGoogleSignIn = () =>{
+    setSignupError('');
+    providerLogin(googleProvider)
+    .then(result =>{
+      const user = result.user;
+      toast.success('You are successfully created an id..', {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+        saveUser(user.displayName,user.email);
+    })
+    .catch(error =>{
+      console.log(error);
+      setSignupError(error.message);
+    });
+  }
+
   const saveUser = (name,email) =>{
     const user = {name,email};
     fetch('http://localhost:5000/users',{
@@ -58,7 +81,17 @@ const Signup = () => {
     })
     .then(res => res.json())
     .then(data =>{
-      console.log(data)
+      console.log(data);
+      toast.success('User Saved Successfully', {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       setCreatedUserEmail(email);
     })
   }
@@ -160,6 +193,7 @@ const Signup = () => {
               <div className="divider">OR</div>
               <button
                 type="submit"
+                onClick={handleGoogleSignIn}
                 className="flex  w-full justify-center rounded-md bg-orange-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               > 
               {/* <AiOutlineGoogle/> */}

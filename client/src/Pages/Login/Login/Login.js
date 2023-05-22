@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+  const [name,setName] = useState('');
+  const [email,setEmail] = useState('');
+  const [loginError,setLoginError] = useState('');
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -63,6 +66,7 @@ const Login = () => {
               >
                 Sign in
               </button>
+              {loginError && <p className='text-red-500'>{loginError}</p>}
             </div>
           </form>
 
