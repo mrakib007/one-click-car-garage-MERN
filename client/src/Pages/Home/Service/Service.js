@@ -19,7 +19,7 @@ const Service = () => {
         <Card className="w-96">
           <CardHeader shadow={false} floated={false} className="h-96">
             <img
-              src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80"
+              src="https://images.unsplash.com/photo-1642075211546-7de99d235d21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
               className="w-full h-full object-cover"
             />
           </CardHeader>
@@ -55,7 +55,7 @@ const Service = () => {
         <Card className="w-96">
           <CardHeader shadow={false} floated={false} className="h-96">
             <img
-              src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80"
+              src="https://images.unsplash.com/photo-1642075223291-f9ec545889fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
               className="w-full h-full object-cover"
             />
           </CardHeader>
