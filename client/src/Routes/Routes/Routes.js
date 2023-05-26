@@ -5,11 +5,13 @@ import Login from "../../Pages/Login/Login/Login";
 import Signup from "../../Pages/Login/Signup/Signup";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import About from "../../Pages/Home/About/About";
+import ErrorPage from "../../Shared/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path:'/',
         element: <Main/>,
+        errorElement: <ErrorPage/>,
         children: [
             {
                 path: '/',
