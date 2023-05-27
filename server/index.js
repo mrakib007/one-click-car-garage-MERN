@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const port = process.env.PORT || 5000;
@@ -39,6 +39,7 @@ async function run() {
     const usersCollection = client
       .db("oneClickCarSolution")
       .collection("users");
+    const serviceCollection = client.db("oneClickCarSolution").collection('services');   
 
     const verifyAdmin = async (req, res, next) => {
       const decodedEmail = req.decoded.email;
@@ -85,6 +86,25 @@ async function run() {
       const query = {email};
       const user = await usersCollection.findOne(query);
       res.send({isAdmin: user?.role === 'admin'});
+    })
+
+    app.put('/users/admin/:id',async(req,res)=>{
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)};
+      const options = {upsert: true};
+      const updatedDoc = {
+        $set: {
+          role: 'admin'
+        }
+      }
+      const result = await usersCollection.updateOne(filter,updatedDoc,options);
+      res.send(result);
+    })
+
+    app.post('/services',async(req,res)=>{
+      const services = req.body;
+      const result = await serviceCollection.insertOne(services);
+      res.send((result));
     })
     
   } finally {
