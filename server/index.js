@@ -40,6 +40,7 @@ async function run() {
       .db("oneClickCarSolution")
       .collection("users");
     const serviceCollection = client.db("oneClickCarSolution").collection('services');   
+    const addedServiceCollection = client.db("oneClickCarSolution").collection('addedServices');   
 
     const verifyAdmin = async (req, res, next) => {
       const decodedEmail = req.decoded.email;
@@ -103,8 +104,14 @@ async function run() {
 
     app.post('/addService',async(req,res)=>{
       const services = req.body;
-      const result = await serviceCollection.insertOne(services);
+      const result = await addedServiceCollection.insertOne(services);
       res.send((result));
+    })
+
+    app.get('/services',async(req,res)=>{
+      const query = {};
+      const services = await serviceCollection.find(query).toArray();
+      res.send(services);
     })
     
   } finally {
