@@ -6,6 +6,7 @@ import Signup from "../../Pages/Login/Signup/Signup";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import About from "../../Pages/Home/About/About";
 import ErrorPage from "../../Shared/ErrorPage/ErrorPage";
+import AddService from "../../Pages/DashBoard/AddService/AddService";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,13 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <DashboardLayout></DashboardLayout>,
-        children:[]
+        errorElement: <ErrorPage/>,
+        children:[
+            {
+                path: '/dashboard/addService',
+                element: <AddService/>
+            }
+        ]
     }
 ])
 
