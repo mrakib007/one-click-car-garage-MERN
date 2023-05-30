@@ -6,6 +6,7 @@ const AddService = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -32,6 +33,8 @@ const AddService = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
+          console.log(imgData.data.url);
+        }
           const service = {
             name: data.name,
             description: data.description,
@@ -51,8 +54,9 @@ const AddService = () => {
             .then((res) => res.json())
             .then((result) => {
               console.log(result);
+              reset();
             });
-        }
+        
       });
   };
 
@@ -136,7 +140,7 @@ const AddService = () => {
             {...register("category", {
               required: true,
             })}
-            className="select select-bordered"
+            className="select select-bordered my-2"
           >
             {services?.map((service) => (
               <option key={service._id} value={service.id}>
