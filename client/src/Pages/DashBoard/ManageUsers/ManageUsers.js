@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery({
@@ -12,10 +14,44 @@ const ManageUsers = () => {
   });
 
   const handleMakeAdmin = (id) =>{
-    
+    console.log(id,'from makeAdmin function');
+    fetch(`http://localhost:5000/users/adimin/${id}`,{
+      method: 'PUT',
+    //   headers: {
+    //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+    // }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.modifiedCount > 0){
+        toast.success('Making Admin is Successful...', {
+          position: "top-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+          refetch();
+      }
+    })
   }
   return (
     <div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
