@@ -8,6 +8,7 @@ import About from "../../Pages/Home/About/About";
 import ErrorPage from "../../Shared/ErrorPage/ErrorPage";
 import AddService from "../../Pages/DashBoard/AddService/AddService";
 import ManageUsers from "../../Pages/DashBoard/ManageUsers/ManageUsers";
+import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         element: <DashboardLayout></DashboardLayout>,
         // errorElement: <ErrorPage/>,
         children:[
+            {
+                path: '/dashboard',
+                element: <DashBoard></DashBoard>
+            },
             {
                 path: '/dashboard/addService',
                 element: <AddService/>
