@@ -40,7 +40,9 @@ async function run() {
       .db("oneClickCarSolution")
       .collection("users");
     const serviceCollection = client.db("oneClickCarSolution").collection('services');   
-    const addedServiceCollection = client.db("oneClickCarSolution").collection('addedServices');   
+    const addedServiceCollection = client.db("oneClickCarSolution").collection('addedServices');
+    const paymentsCollection = client.db("oneClickCarSolution").collection('paymentsCollection');
+    const bookingsCollection = client.db("oneClickCarSolution").collection('bookingsCollection');  
 
     const verifyAdmin = async (req, res, next) => {
       const decodedEmail = req.decoded.email;
@@ -112,6 +114,41 @@ async function run() {
       const query = {};
       const services = await serviceCollection.find(query).toArray();
       res.send(services);
+    })
+
+    app.get('/services/:id',async(req,res)=>{
+      try{
+        const id = req.params.id;
+        const filterServices = await addedServiceCollection.find({id:id}).toArray();
+        res.send(filterServices);
+      }catch(error){
+        res.status(500).json({message: 'Internal Server Error'});
+      }
+    })
+
+    //Bookings related 
+    app.post('/bookings',async(req,res)=>{
+      const booking = req.body;
+      const result = await bookingsCollection.insertOne(booking);
+      res.send(result);
+    })
+
+    app.get('/bookings',async(req,res)=>{
+      const email = req.query.email;
+      const decodedEmail = req.decoded.email;
+      if(email !== decodedEmail){
+        return res.status(403).send({message: 'Forbidden Access'});
+      }
+      const query = {email: email};
+      const bookings = await bookingsCollection.find(query).toArray();
+      res.send(bookings);
+    })
+
+    app.get('/bookings/:id',async(req,res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const booking = await bookingsCollection.findOne(query);
+      res.send(booking);
     })
     
   } finally {

@@ -7,6 +7,7 @@ import {
     Button,
     CardFooter,
   } from "@material-tailwind/react";
+import { Link } from 'react-router-dom';
 
 const SingleService = ({category}) => {
     const {id,category:brand} = category;
@@ -37,6 +38,7 @@ const SingleService = ({category}) => {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
+          <Link to={`/services/${id}`}>
           <Button
             ripple={false}
             fullWidth={true}
@@ -44,6 +46,7 @@ const SingleService = ({category}) => {
           >
             Add to Cart
           </Button>
+          </Link>
         </CardFooter>
       </Card>
     );
