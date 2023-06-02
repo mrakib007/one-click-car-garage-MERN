@@ -9,6 +9,7 @@ import ErrorPage from "../../Shared/ErrorPage/ErrorPage";
 import AddService from "../../Pages/DashBoard/AddService/AddService";
 import ManageUsers from "../../Pages/DashBoard/ManageUsers/ManageUsers";
 import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
+import ServiceDetails from "../../Pages/DashBoard/ServiceDetails/ServiceDetails";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,11 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup/>
+            },
+            {
+                path: 'services/:id',
+                element: <ServiceDetails/>,
+                loader: ({params}) = fetch(`http://localhost:5000/services/${params.id}`)
             }
         ]
     },

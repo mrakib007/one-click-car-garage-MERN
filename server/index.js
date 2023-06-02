@@ -36,9 +36,7 @@ function verifyJWT(req, res, next) {
 
 async function run() {
   try {
-    const usersCollection = client
-      .db("oneClickCarSolution")
-      .collection("users");
+    const usersCollection = client.db("oneClickCarSolution").collection("users");
     const serviceCollection = client.db("oneClickCarSolution").collection('services');   
     const addedServiceCollection = client.db("oneClickCarSolution").collection('addedServices');
     const paymentsCollection = client.db("oneClickCarSolution").collection('paymentsCollection');
@@ -108,6 +106,29 @@ async function run() {
       const services = req.body;
       const result = await addedServiceCollection.insertOne(services);
       res.send((result));
+    })
+
+    app.delete('/services/:id',async(req,res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)};
+      const result = await addedServiceCollection.deleteOne(query);
+      res.send(result);
+    })
+
+    app.get('myAddedServices',async(req,res)=>{
+      try{ 
+        let query = {};
+        if(req.query.email){
+          query = {
+            email: req.query.email
+          }
+        }
+        const cursor = addedServiceCollection.find(query);
+        const services = await cursor.toArray();
+        res.send(services);
+      }catch(error){
+        res.status(500).json({message: 'Internal Server Error'});
+      }
     })
 
     app.get('/services',async(req,res)=>{
