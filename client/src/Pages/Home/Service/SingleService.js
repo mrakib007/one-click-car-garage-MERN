@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const SingleService = ({category}) => {
     const {id,category:brand} = category;
     return (
-        <Card className="w-96">
+        <Card className="w-96 my-3">
         <CardHeader shadow={false} floated={false} className="h-96">
           <img
             src="https://images.unsplash.com/photo-1642075211546-7de99d235d21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"

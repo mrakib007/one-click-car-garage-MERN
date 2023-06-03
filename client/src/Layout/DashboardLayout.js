@@ -14,7 +14,7 @@ const DashboardLayout = () => {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           <Outlet />
-          <label htmlFor="my-drawer-2" className="drawer overlay"></label>
+          <label htmlFor="my-drawer-2" className="drawe"></label>
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

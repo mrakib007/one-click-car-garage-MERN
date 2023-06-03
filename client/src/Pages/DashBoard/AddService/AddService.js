@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Shared/Loading/Loading";
+import { AuthContext } from "../../../contexts/AuthProvider";
 const AddService = () => {
   const {
     register,
@@ -9,6 +10,7 @@ const AddService = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const {user} = useContext(AuthContext);
 
   const { data: services = [], isLoading } = useQuery({
     queryKey: ["Service"],
@@ -36,7 +38,8 @@ const AddService = () => {
           console.log(imgData.data.url);
         }
           const service = {
-            name: data.name,
+            name: user.displayName,
+            serviceName: data.serviceName,
             description: data.description,
             price: data.price,
             image: imgData.data.url,
@@ -73,11 +76,11 @@ const AddService = () => {
           </label>
           <input
             type="text"
-            {...register("name", { required: "Name is required" })}
+            {...register("serviceName", { required: "Name is required" })}
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
-          {errors.name && (
-            <p className="text-red-500">{errors.name.messages}</p>
+          {errors.serviceName && (
+            <p className="text-red-500">{errors.serviceName.messages}</p>
           )}
         </div>
 

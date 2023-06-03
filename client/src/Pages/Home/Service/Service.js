@@ -20,12 +20,12 @@ const Service = () => {
     }
   })
   return (
-    <div className="">
-      <h1 class="max-w-2xl my-20 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-5xl mx-auto dark:text-white">
+    <div className="px-3">
+      <h1 class="max-w-2xl my-20 text-center text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-5xl mx-auto dark:text-white">
         Services That We Provide
       </h1>
 
-      <div className="grid grid-cols-3">
+      <div className="grid lg:grid-cols-3">
 
         {
           allCategories.map(category => 
