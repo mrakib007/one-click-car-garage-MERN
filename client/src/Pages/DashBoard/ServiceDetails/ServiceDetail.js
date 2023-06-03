@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ServiceDetail = ({ service, setProductBooking }) => {
+const ServiceDetail = ({ service, setServiceBooking }) => {
   console.log(service);
-  const { serviceName, description, price, image } = service;
+  const { serviceName, description, price, image,name } = service;
+  const word = description.slice(0,40);
   return (
-    <div className="my-2 px-2">
-      <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="my-2">
+      {/* <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <Link href="#">
           <img
             class="p-8 rounded-t-lg"
@@ -86,6 +87,33 @@ const ServiceDetail = ({ service, setProductBooking }) => {
               Add to cart
             </Link>
           </div>
+        </div>
+      </div> */}
+
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <img
+          class="w-full"
+          src={image}
+          alt="Sunset in the mountains"
+        />
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{serviceName}</div>
+          <p class="text-gray-700 text-base">
+            {description}
+          </p>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Price: {price} Taka
+          </span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Posted By: {name}
+          </span>
+          {/* <button class="inline-block btn btn-primary rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">
+            Book Now
+          </button> */}
+          <label htmlFor="booking-modal" className="inline-block btn btn-primary rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
+          onClick={()=>setServiceBooking(service)}></label>
         </div>
       </div>
     </div>
