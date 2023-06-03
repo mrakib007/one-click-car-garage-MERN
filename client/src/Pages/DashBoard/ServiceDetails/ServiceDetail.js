@@ -99,7 +99,7 @@ const ServiceDetail = ({ service, setServiceBooking }) => {
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">{serviceName}</div>
           <p class="text-gray-700 text-base">
-            {description}
+            {word}
           </p>
         </div>
         <div class="px-6 pt-4 pb-2">
@@ -112,8 +112,8 @@ const ServiceDetail = ({ service, setServiceBooking }) => {
           {/* <button class="inline-block btn btn-primary rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">
             Book Now
           </button> */}
-          <label htmlFor="booking-modal" className="inline-block btn btn-primary rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
-          onClick={()=>setServiceBooking(service)}></label>
+          <label htmlFor="booking-modal" className="inline-block btn btn-primary rounded-full px-3 py-3 text-sm font-semibold mr-2 mb-2"
+          onClick={()=>setServiceBooking(service)}>Book Now</label>
         </div>
       </div>
     </div>

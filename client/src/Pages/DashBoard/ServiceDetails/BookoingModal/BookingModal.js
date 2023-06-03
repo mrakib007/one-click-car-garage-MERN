@@ -1,25 +1,73 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../../contexts/AuthProvider";
 
-const BookingModal = () => {
-  return (
-    <div>
-      {/* You can open the modal using ID.showModal() method */}
-      <button className="btn" onClick={() => window.my_modal_3.showModal()}>
-        open modal
-      </button>
-      <dialog id="my_modal_3" className="modal">
-        <form method="dialog" className="modal-box">
-          <button
-            htmlFor="my-modal-3"
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+const BookingModal = ({serviceBooking,setServiceBooking}) => {
+    const {user} = useContext(AuthContext);
+    const { serviceName, description, price, image,name } = serviceBooking;
+    const handleBooking = (event) =>{
+        event.preventDefault();
+    }
+    return (
+    <>
+      <input type="checkbox" id="booking-modal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative">
+          <label
+            htmlFor="booking-modal"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
-          </button>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
-        </form>
-      </dialog>
-    </div>
+          </label>
+          <h3 className="text-lg font-bold">{serviceName}</h3>
+          <form
+            onSubmit={handleBooking}
+            className="gird grid-cols-1 gap-3 mt-8"
+          >
+            <input
+              className="input w-full input-bordered my-2"
+              type="text"
+              name="name"
+              defaultValue={user?.displayName}
+              disabled
+            />
+            <input
+              className="input w-full input-bordered my-2"
+              type="email"
+              name="email"
+              defaultValue={user?.email}
+              disabled
+            />
+            <input
+              className="input w-full input-bordered my-2"
+              type="text"
+              name="price"
+              defaultValue={price}
+              disabled
+            />
+            <input
+              className="input w-full input-bordered my-2"
+              name="phone"
+              type="number"
+              placeholder="Phone Number"
+              required
+            />
+            {/* <input
+              name="meetingLocation"
+              type="text"
+              placeholder="Meeting Location"
+              className="input w-full input-bordered"
+              required
+            /> */}
+            <br />
+            <input
+              className="btn btn-accent w-full"
+              type="submit"
+              value="Submit"
+            />
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 
