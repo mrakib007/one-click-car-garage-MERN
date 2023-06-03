@@ -10,6 +10,7 @@ import AddService from "../../Pages/DashBoard/AddService/AddService";
 import ManageUsers from "../../Pages/DashBoard/ManageUsers/ManageUsers";
 import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import ServiceDetails from "../../Pages/DashBoard/ServiceDetails/ServiceDetails";
+import MyBookings from "../../Pages/DashBoard/MyBookings/MyBookings";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup/>
+            },
+            {
+                path: '/dashboard/myBookings',
+                element: <MyBookings/>
             },
             {
                 path: 'services/:id',
