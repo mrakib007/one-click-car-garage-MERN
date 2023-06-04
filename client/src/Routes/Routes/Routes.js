@@ -11,6 +11,7 @@ import ManageUsers from "../../Pages/DashBoard/ManageUsers/ManageUsers";
 import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import ServiceDetails from "../../Pages/DashBoard/ServiceDetails/ServiceDetails";
 import MyBookings from "../../Pages/DashBoard/MyBookings/MyBookings";
+import Payment from "../../Pages/DashBoard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/manageUsers',
                 element: <ManageUsers/>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment/>,
+                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
             }
         ]
     }
