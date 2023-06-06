@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import {ToastContainer, toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const ManageUsers = () => {
+  const {user} = useContext(AuthContext);
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -39,7 +41,8 @@ const ManageUsers = () => {
     })
   }
   return (
-    <div>
+    <div className="my-10">
+      <h1 className="text-3xl font-semibold my-10">You can manage users form here <span className="text-primary">{user?.displayName}.</span></h1>
       <ToastContainer
         position="bottom-left"
         autoClose={3000}

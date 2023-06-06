@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const MyBookings = () => {
     const {user} = useContext(AuthContext);
+    console.log(user)
 
     const url = `http://localhost:5000/bookings?email=${user?.email}`;
     const {data: bookings = []} = useQuery({
@@ -22,7 +23,8 @@ const MyBookings = () => {
     })
     console.log(bookings)
     return (
-        <div className=''>
+        <div className='my-10'>
+          <h1 className='text-3xl font-semibold my-5'>This is your booking orders <span className='text-primary'>{user?.displayName}.</span></h1>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

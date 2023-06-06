@@ -36,10 +36,6 @@ const router = createBrowserRouter([
                 element: <Signup/>
             },
             {
-                path: '/dashboard/myBookings',
-                element: <MyBookings/>
-            },
-            {
                 path: 'services/:id',
                 element: <ServiceDetails/>,
                 loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
@@ -58,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/addService',
                 element: <AddService/>
+            },
+            {
+                path: '/dashboard/myBookings',
+                element: <MyBookings/>
             },
             {
                 path: '/dashboard/manageUsers',
