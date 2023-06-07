@@ -12,6 +12,10 @@ import DashBoard from "../../Pages/DashBoard/DashBoard/DashBoard";
 import ServiceDetails from "../../Pages/DashBoard/ServiceDetails/ServiceDetails";
 import MyBookings from "../../Pages/DashBoard/MyBookings/MyBookings";
 import Payment from "../../Pages/DashBoard/Payment/Payment";
+import PrivateRoutes from "./PrivateRoutes";
+import AdminRoute from './AdminRoute';
+import Navbar from "../../Shared/Navbar/Navbar";
+import Footer from "../../Shared/Footer/Footer";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +48,9 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element:<PrivateRoutes>
+        <DashboardLayout></DashboardLayout>
+        </PrivateRoutes>,
         // errorElement: <ErrorPage/>,
         children:[
             {
@@ -53,7 +59,9 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/addService',
-                element: <AddService/>
+                element: <AdminRoute>
+                    <AddService/>
+                </AdminRoute>
             },
             {
                 path: '/dashboard/myBookings',
@@ -61,7 +69,9 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/manageUsers',
-                element: <ManageUsers/>
+                element: <AdminRoute>
+                    <ManageUsers/>
+                </AdminRoute>
             },
             {
                 path: '/dashboard/payment/:id',
@@ -69,6 +79,12 @@ const router = createBrowserRouter([
                 loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
             }
         ]
+    },{
+        path: '*',element: <div>
+            <Navbar/>
+            <ErrorPage/>
+            <Footer/>
+        </div>
     }
 ])
 

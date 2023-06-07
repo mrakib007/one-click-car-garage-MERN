@@ -71,9 +71,9 @@ const ManageUsers = () => {
               <th scope="col" class="px-6 py-3">
                 Admin
               </th>
-              <th scope="col" class="px-6 py-3">
+              {/* <th scope="col" class="px-6 py-3">
                 Delete User
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -95,11 +95,11 @@ const ManageUsers = () => {
                   </button>}
                 </td>
                 <td class="px-6 py-4">
-                  <button
+                  {/* <button
                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Delete User
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}

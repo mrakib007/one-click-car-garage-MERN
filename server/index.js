@@ -108,6 +108,12 @@ async function run() {
       res.send((result));
     })
 
+    app.get('/manageServices',async(req,res)=>{
+      const query ={};
+      const addedServices = await addedServiceCollection.find(query).toArray();
+      res.send(addedServices);
+    })
+
     app.delete('/services/:id',async(req,res)=>{
       const id = req.params.id;
       const query = {_id: new ObjectId(id)};
