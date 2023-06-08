@@ -15,7 +15,7 @@ const AddService = () => {
   const { data: services = [], isLoading } = useQuery({
     queryKey: ["Service"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/services");
+      const res = await fetch("https://server-mrakib007.vercel.app/services");
       const data = await res.json();
       return data;
     },
@@ -46,7 +46,7 @@ const AddService = () => {
             id: data.category,
           };
 
-          fetch("http://localhost:5000/addService", {
+          fetch("https://server-mrakib007.vercel.app/addService", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -42,7 +42,7 @@ const router = createBrowserRouter([
             {
                 path: 'services/:id',
                 element: <ServiceDetails/>,
-                loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({params}) => fetch(`https://server-mrakib007.vercel.app/services/${params.id}`)
             }
         ]
     },
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment/>,
-                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({params}) => fetch(`https://server-mrakib007.vercel.app/bookings/${params.id}`)
             }
         ]
     },{

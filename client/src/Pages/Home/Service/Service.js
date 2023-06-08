@@ -14,7 +14,7 @@ const Service = () => {
   const {data: allCategories = []} = useQuery({
     queryKey: ['users'],
     queryFn: async () =>{
-      const res = await fetch('http://localhost:5000/services');
+      const res = await fetch('https://server-mrakib007.vercel.app/services');
       const data = await res.json();
       return data;
     }
